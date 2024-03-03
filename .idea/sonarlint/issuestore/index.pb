@@ -13,8 +13,6 @@ a
 1src/app/components/ZoomParallax/styles.module.css,9\a\9abbf980b55d87e77e571f111c3ab92a91454065
 K
 src/app/components/copy.tsx,d\7\d7df0b140ef065112721f92d054d0db250a1af50
-Q
-!src/app/components/navigation.tsx,7\f\7f49cb66b0d88e12e2a37a4d5beb896e4a4cce35
 I
 src/app/projekti/page.tsx,a\4\a407796fa74b7f1c09f97593d7c8f890e58ddacf
 M
@@ -25,3 +23,7 @@ I
 next.config.mjs,d\f\df8bd0b91ecb778bf2a1b031c7677390c7442bb4
 V
 &src/app/components/ScrollComponent.tsx,2\2\22bbf1a803a0894e04f99af30c82c4df461020cd
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+]
+-.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
