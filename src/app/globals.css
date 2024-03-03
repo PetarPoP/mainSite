@@ -2,32 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+body{
+  margin: 0px;
+  background-color: rgb(24, 24, 24);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.appear {
+  animation: appear 0.3s ease-out forwards;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.name span:nth-child(1),
+.name span:nth-child(2),
+.name span:nth-child(3),
+.name span:nth-child(4),
+.name span:nth-child(5),
+.name span:nth-child(6),
+.name span:nth-child(10),
+.name span:nth-child(11),
+.name span:nth-child(12),
+.name span:nth-child(13){
+  animation: down-in 0.5s forwards;
+  pointer-events: none;
+}
+
+.name:hover span:nth-child(1),
+.name:hover span:nth-child(2),
+.name:hover span:nth-child(3),
+.name:hover span:nth-child(4),
+.name:hover span:nth-child(5),
+.name:hover span:nth-child(6),
+.name:hover span:nth-child(10),
+.name:hover span:nth-child(11),
+.name:hover span:nth-child(12),
+.name:hover span:nth-child(13){
+  animation: out-up 0.5s forwards;
+  pointer-events: none;
+}
+
+@keyframes out-up {
+  from {
+    transform: translateY(0);
+    opacity: 1;
   }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes down-in {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.stick {
+  position: sticky;
+  top: 5vh;
 }
