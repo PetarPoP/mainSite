@@ -14,34 +14,37 @@ import {
 
 export default function Home() {
 
-  useEffect( () => {
+  useEffect(() => {
+  if (typeof window !== 'undefined') {
     const lenis = new Lenis()
 
-    function raf(time: number) {
+    // @ts-ignore
+      function raf(time: number) {
       lenis.raf(time)
       requestAnimationFrame(raf)
     }
 
     requestAnimationFrame(raf)
-  },[])
 
     window.addEventListener('scroll', function() {
       const stickyName = document.getElementById('stick');
       const target = document.getElementById('target');
       // @ts-ignore
-        const targetRect = target.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
       const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
 
       if (targetRect.top <= viewportHeight * 0.15) {
-          // @ts-ignore
-          stickyName.classList.add('disappear');
+        // @ts-ignore
+        stickyName.classList.add('disappear');
       } else {
-          // @ts-ignore
-          stickyName.classList.remove('disappear');
-          // @ts-ignore
-          stickyName.classList.add('appear')
+        // @ts-ignore
+        stickyName.classList.remove('disappear');
+        // @ts-ignore
+        stickyName.classList.add('appear')
       }
     });
+  }
+}, [])
 
   return (
       <>
