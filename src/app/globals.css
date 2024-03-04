@@ -16,8 +16,21 @@ body{
   }
 }
 
+@keyframes disappear {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 .appear {
   animation: appear 0.3s ease-out forwards;
+}
+
+.disappear {
+   animation: disappear 0.3s ease-out forwards;
 }
 
 .name span:nth-child(1),
