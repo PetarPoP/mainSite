@@ -7,6 +7,10 @@ body{
   background-color: rgb(24, 24, 24);
 }
 
+.color {
+  background-color: rgb(24, 24, 24);
+}
+
 @keyframes appear {
   from {
     opacity: 0;
