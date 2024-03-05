@@ -1,6 +1,6 @@
 'use client'
 import styles from './page.module.css'
-import { useEffect } from 'react';
+import {useEffect, useRef} from 'react';
 import Lenis from '@studio-freight/lenis'
 import ZoomParallax from './components/ZoomParallax';
 import Link from "next/link";
@@ -25,24 +25,6 @@ export default function Home() {
     }
 
     requestAnimationFrame(raf)
-
-    window.addEventListener('scroll', function() {
-      const stickyName = document.getElementById('stick');
-      const target = document.getElementById('target');
-      // @ts-ignore
-      const targetRect = target.getBoundingClientRect();
-      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-
-      if (targetRect.top <= viewportHeight * 0.15) {
-        // @ts-ignore
-        stickyName.classList.add('disappear');
-      } else {
-        // @ts-ignore
-        stickyName.classList.remove('disappear');
-        // @ts-ignore
-        stickyName.classList.add('appear')
-      }
-    });
   }
 }, [])
 
@@ -64,92 +46,96 @@ export default function Home() {
                       )
                   })}
               </div>
-              <p id="target" className="text-center text-pretty md:max-w-[500px] max-w-[200px] mt-6 md:text-xl text-xs">
-                  Student sam računarstva u Splitu. U svoje slobodno vrijeme volim
-                  programirati i fotografirati te neke od mojih projekata i fotografija
-                  možete pronaći na ovoj stranici. Na raspolaganju sam za više
-                  informacija.
-              </p>
-              <div className="flex flex-row items-center gap-2">
-                  <Link href="/projekti">
-                      <button className="p-1 transition-all duration-100 ease-in-out rounded border-b-2
-                      hover:bg-zinc-700 hover:border-b-4 hover:border-t-2 hover:border-white hover:border-l-2 hover:border-r-2
-                      active:transform active:border-b-0 active:translate-y-0
-                      mt-2 md:text-xl text-md font-bold">
-                          Projekti
-                      </button>
-                  </Link>
-                  <Link href="/galerija" scroll={true} className="flex flex-row">
-                      <button className="p-1 transition-all duration-100 ease-in-out rounded border-b-2
-                      hover:bg-zinc-700 hover:border-b-4 hover:border-t-2 hover:border-white hover:border-l-2 hover:border-r-2
-                      active:transform active:border-b-0 active:translate-y-0
-                      mt-2 md:text-xl text-md font-bold">
-                          Galerija
-                      </button>
-                  </Link>
-              </div>
-        <h2 className="md:text-3xl text-lg font-bold mt-4 md:mt-6 md:mb-2 mb-1">Lokacija</h2>
-        <div className="flex flex-row items-center gap-2">
-            <div className="flex gap-1">
-                <RiMapPin2Line className="md:text-lg text-xs mr-1 translate-y-1/4"/>
-                <h3 className="md:text-lg text-xs underline">Split</h3>
-            </div>
-            <div className="flex gap-1">
-                      <RiMapPin2Line className="md:text-lg text-xs mr-1 translate-y-1/4"/>
-                      <h3 className="md:text-lg text-xs underline">Livno</h3>
-                  </div>
-              </div>
-              <h2 className="md:text-3xl text-lg font-bold mt-4 md:mt-6 md:mb-2 mb-1">Kontakt</h2>
-              <div className="flex flex-col items-center gap-2 md:flex-row mb-2">
-                  <Copy value="+385 99 373 2936">
-                      <RiPhoneLine className="md:text-xl text-xs mr-1"/>
-                      <h3 className="md:text-md text-xs ml-1">
-                          HR:
-                          <Link href="tel:+385993732936" className="md:text-md text-xs ml-1">
-                              <button className="p-1 transition-all duration-100 ease-in-out rounded border-b-2
-                  hover:bg-zinc-700 hover:border-b-4 hover:border-t-2 hover:border-white hover:border-l-2 hover:border-r-2
-                  active:transform active:border-b-0 active:translate-y-0">
-                                  +385 99 373 2936
-                              </button>
-                          </Link>
-                      </h3>
-                  </Copy>
-                  <Copy value="+387 63 632 005">
-                      <RiPhoneLine className="md:text-xl text-xs mr-1"/>
-                      <h3 className="md:text-md text-xs ml-1">
-                          BiH:
-                          <Link href="tel:+38763632005" className="md:text-md text-xs ml-1 ">
-                              <button className="p-1 transition-all duration-100 ease-in-out rounded border-b-2
-                  hover:bg-zinc-700 hover:border-b-4 hover:border-t-2 hover:border-white hover:border-l-2 hover:border-r-2
-                  active:transform active:border-b-0 active:translate-y-0">
-                                  +387 63 632 005
-                              </button>
-                          </Link>
-                      </h3>
-                  </Copy>
-              </div>
-              <Copy value="petarpopovic719@gmail.com">
-                  <RiMailLine className="md:text-xl text-xs mr-1"/>
-                  <h3 className="md:text-md text-xs ml-1">
-                      Email:
-                      <Link
-                          href="mailto:petarpopovic719@gmail.com"
-                          className="md:text-md text-xs ml-1"
-                      >
+              <div id="target"
+                   className="flex-col flex items-center justify-center w-full
+                   -mt-[20vh] mb-[20vh] md:mb-0 md:mt-0">
+                  <div className="flex flex-row items-center gap-2">
+                      <Link href="/projekti">
                           <button className="p-1 transition-all duration-100 ease-in-out rounded border-b-2
-                  hover:bg-zinc-700 hover:border-b-4 hover:border-t-2 hover:border-white hover:border-l-2 hover:border-r-2
-                  active:transform active:border-b-0 active:translate-y-0">
-                              petarpopovic719@gmail.com
+                      hover:bg-zinc-700 hover:border-b-4 hover:border-t-2 hover:border-white hover:border-l-2 hover:border-r-2
+                      active:transform active:border-b-0 active:translate-y-0
+                      mt-2 md:text-xl text-md font-bold">
+                              Projekti
                           </button>
                       </Link>
-                  </h3>
-              </Copy>
-              <Link href="https://www.instagram.com/pop_2110/" target="_blank">
-                  <RiInstagramLine className="md:size-12 size-8 mt-4 p-1 transition-all duration-100 ease-in-out rounded
+                      <Link href="/galerija" scroll={true} className="flex flex-row">
+                          <button className="p-1 transition-all duration-100 ease-in-out rounded border-b-2
+                      hover:bg-zinc-700 hover:border-b-4 hover:border-t-2 hover:border-white hover:border-l-2 hover:border-r-2
+                      active:transform active:border-b-0 active:translate-y-0
+                      mt-2 md:text-xl text-md font-bold">
+                              Galerija
+                          </button>
+                      </Link>
+                  </div>
+                  <p className="text-center text-pretty md:max-w-[500px] max-w-[200px] mt-6 md:text-xl text-xs">
+                      Student sam računarstva u Splitu. U svoje slobodno vrijeme volim
+                      programirati i fotografirati te neke od mojih projekata i fotografija
+                      možete pronaći na ovoj stranici. Na raspolaganju sam za više
+                      informacija.
+                  </p>
+                  <h2 className="md:text-3xl text-lg font-bold mt-4 md:mt-6 md:mb-2 mb-1">Lokacija</h2>
+                  <div className="flex flex-row items-center gap-2">
+                      <div className="flex gap-1">
+                          <RiMapPin2Line className="md:text-lg text-xs mr-1 translate-y-1/4"/>
+                          <h3 className="md:text-lg text-xs underline">Split</h3>
+                      </div>
+                      <div className="flex gap-1">
+                          <RiMapPin2Line className="md:text-lg text-xs mr-1 translate-y-1/4"/>
+                          <h3 className="md:text-lg text-xs underline">Livno</h3>
+                      </div>
+                  </div>
+                  <h2 className="md:text-3xl text-lg font-bold mt-4 md:mt-6 md:mb-2 mb-1">Kontakt</h2>
+                  <div className="flex flex-col items-center gap-2 md:flex-row mb-2">
+                      <Copy value="+385 99 373 2936">
+                          <RiPhoneLine className="md:text-xl text-xs mr-1"/>
+                          <h3 className="md:text-md text-xs ml-1">
+                              HR:
+                              <Link href="tel:+385993732936" className="md:text-md text-xs ml-1">
+                                  <button className="p-1 transition-all duration-100 ease-in-out rounded border-b-2
+                  hover:bg-zinc-700 hover:border-b-4 hover:border-t-2 hover:border-white hover:border-l-2 hover:border-r-2
+                  active:transform active:border-b-0 active:translate-y-0">
+                                      +385 99 373 2936
+                                  </button>
+                              </Link>
+                          </h3>
+                      </Copy>
+                      <Copy value="+387 63 632 005">
+                          <RiPhoneLine className="md:text-xl text-xs mr-1"/>
+                          <h3 className="md:text-md text-xs ml-1">
+                              BiH:
+                              <Link href="tel:+38763632005" className="md:text-md text-xs ml-1 ">
+                                  <button className="p-1 transition-all duration-100 ease-in-out rounded border-b-2
+                  hover:bg-zinc-700 hover:border-b-4 hover:border-t-2 hover:border-white hover:border-l-2 hover:border-r-2
+                  active:transform active:border-b-0 active:translate-y-0">
+                                      +387 63 632 005
+                                  </button>
+                              </Link>
+                          </h3>
+                      </Copy>
+                  </div>
+                  <Copy value="petarpopovic719@gmail.com">
+                      <RiMailLine className="md:text-xl text-xs mr-1"/>
+                      <h3 className="md:text-md text-xs ml-1">
+                          Email:
+                          <Link
+                              href="mailto:petarpopovic719@gmail.com"
+                              className="md:text-md text-xs ml-1"
+                          >
+                              <button className="p-1 transition-all duration-100 ease-in-out rounded border-b-2
+                  hover:bg-zinc-700 hover:border-b-4 hover:border-t-2 hover:border-white hover:border-l-2 hover:border-r-2
+                  active:transform active:border-b-0 active:translate-y-0">
+                                  petarpopovic719@gmail.com
+                              </button>
+                          </Link>
+                      </h3>
+                  </Copy>
+                  <Link href="https://www.instagram.com/pop_2110/" target="_blank">
+                      <RiInstagramLine className="md:size-12 size-8 mt-4 p-1 transition-all duration-100 ease-in-out rounded
                   hover:bg-zinc-700 hover:border-b-4 hover:border-t-2 hover:border-white hover:border-l-2 hover:border-r-2
                   active:transform active:border-b-0 active:translate-y-0
                   md:mb-[18vh] mb-4"/>
-              </Link>
+                  </Link>
+              </div>
           </div>
       </>
   )

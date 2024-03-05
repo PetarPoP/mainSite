@@ -9,32 +9,32 @@ export default async function Page() {
   const projekti = (await resp.json()) as Repository[];
 
   return (
-      <div className="flex items-center justify-center w-full">
-        <div className="flex-wrap flex gap-3 flex-col p-4 max-w-[500px]">
-          {projekti.map((projekt) => {
-            return <Projekt projekat={projekt} key={projekt.id}/>;
-          })}
-        </div>
+    <div className="flex-col flex items-center justify-center w-full">
+      <div className="flex w-full h-[10vh] text-white justify-center items-center">
+        <Link href="/">
+          <button className="p-1 transition-all duration-100 ease-in-out rounded border-b-2
+                  hover:bg-zinc-700 hover:border-b-4 hover:border-t-2 hover:border-white hover:border-l-2 hover:border-r-2
+                  active:transform active:border-b-0 active:translate-y-0 text-xl">
+            Početna
+          </button>
+        </Link>
       </div>
+      <div className="flex-wrap flex gap-3 flex-col p-4 max-w-[500px]">
+        {projekti.map((projekt) => {
+          return <Projekt projekat={projekt} key={projekt.id}/>;
+        })}
+      </div>
+    </div>
   );
 }
 
 function Projekt({projekat}: Readonly<{ projekat: Repository }>) {
   return (
       <div className="flex-col flex gap-2 p-2 appear">
-        <div className="flex w-full h-[10vh] text-white justify-center items-center">
-          <Link href="/">
-            <button className="p-1 transition-all duration-100 ease-in-out rounded border-b-2
-                    hover:bg-zinc-700 hover:border-b-4 hover:border-t-2 hover:border-white hover:border-l-2 hover:border-r-2
-                    active:transform active:border-b-0 active:translate-y-0 text-xl">
-              Početna
-            </button>
-          </Link>
-        </div>
-          <button className="p-1 transition-all duration-100 ease-in-out rounded
+        <button className="p-1 transition-all duration-100 ease-in-out rounded
                     hover:bg-zinc-700 hover:border-b-4 hover:border-t-2 hover:border-white hover:border-l-2 hover:border-r-2
                     active:transform active:border-b-0 active:translate-y-0 text-white">
-            <Link href={projekat.html_url} target="_blank" rel="noopener noreferrer" className="text-xl flex justify-center items-center">
+          <Link href={projekat.html_url} target="_blank" rel="noopener noreferrer" className="text-xl flex justify-center items-center">
               {projekat.name}
           </Link>
           </button>
