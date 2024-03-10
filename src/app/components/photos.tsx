@@ -13,6 +13,7 @@ import "yet-another-react-lightbox/plugins/thumbnails.css";
 import Image from "next/image";
 import type { RenderPhotoProps } from "react-photo-album";
 import Link from "next/link";
+
 export function Photos({
                            photos,
                        }: {
@@ -23,6 +24,7 @@ export function Photos({
     const [index, setIndex] = useState(-1);
     const [show, setShow] = useState(true);
     const prevScrollPos = useRef(0);
+    const [reversedPhotos, setReversedPhotos] = useState<(Photo & { description: string; })[]>([]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -34,13 +36,15 @@ export function Photos({
         };
 
         window.addEventListener('scroll', handleScroll);
+        setReversedPhotos([...photos].reverse());
 
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [photos]);
+
     return (
         <>
             {show && (
-                <div className={`flex w-full h-[8vh] text-white justify-center items-center appear sticky 
+                <div className={`flex w-full h-[8vh] text-white justify-center items-center appear sticky
                 top-0 z-50 color`}>
                     <Link href="/">
                         <button className="p-1 transition-all duration-100 ease-in-out rounded border-b-2
@@ -56,7 +60,7 @@ export function Photos({
                     // @ts-ignore
                     renderPhoto={NextJsImage}
                     spacing={10}
-                    photos={photos.map((p) => {
+                    photos={reversedPhotos.map((p: Photo & { description: string; }) => {
                         return {
                             ...p,
                             height: p.height / 12,
@@ -74,7 +78,7 @@ export function Photos({
             </div>
 
             <Lightbox
-                slides={photos}
+                slides={reversedPhotos}
                 open={index >= 0}
                 index={index}
                 close={() => setIndex(-1)}
