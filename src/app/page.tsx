@@ -1,6 +1,6 @@
 'use client'
 import styles from './page.module.css'
-import {useEffect, useRef} from 'react';
+import {useEffect} from 'react';
 import Lenis from '@studio-freight/lenis'
 import ZoomParallax from './components/ZoomParallax';
 import Link from "next/link";
