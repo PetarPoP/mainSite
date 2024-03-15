@@ -24,7 +24,6 @@ export function Photos({
     const [index, setIndex] = useState(-1);
     const [show, setShow] = useState(true);
     const prevScrollPos = useRef(0);
-    const [reversedPhotos, setReversedPhotos] = useState<(Photo & { description: string; })[]>([]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -36,7 +35,6 @@ export function Photos({
         };
 
         window.addEventListener('scroll', handleScroll);
-        setReversedPhotos([...photos].reverse());
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, [photos]);
@@ -60,7 +58,7 @@ export function Photos({
                     // @ts-ignore
                     renderPhoto={NextJsImage}
                     spacing={10}
-                    photos={reversedPhotos.map((p: Photo & { description: string; }) => {
+                    photos={photos.map((p: Photo & { description: string; }) => {
                         return {
                             ...p,
                             height: p.height / 12,
@@ -78,7 +76,7 @@ export function Photos({
             </div>
 
             <Lightbox
-                slides={reversedPhotos}
+                slides={photos}
                 open={index >= 0}
                 index={index}
                 close={() => setIndex(-1)}
