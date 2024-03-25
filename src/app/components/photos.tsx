@@ -26,18 +26,22 @@ export function Photos({
     const prevScrollPos = useRef(0);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollPos = window.scrollY;
-            const isScrollingUp = prevScrollPos.current > currentScrollPos;
+    const threshold = 30; // Set the threshold value
+    const handleScroll = () => {
+        const currentScrollPos = window.scrollY;
+        const isScrollingUp = prevScrollPos.current > currentScrollPos;
 
+        // Only call setShow if the change in scroll position is greater than the threshold
+        if (Math.abs(prevScrollPos.current - currentScrollPos) > threshold) {
             setShow(isScrollingUp);
-            prevScrollPos.current = currentScrollPos;
-        };
+        }
+        prevScrollPos.current = currentScrollPos;
+    };
 
-        window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [photos]);
+    return () => window.removeEventListener('scroll', handleScroll);
+}, [photos]);
 
     return (
         <>
